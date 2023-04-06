@@ -37,7 +37,7 @@ vector.fit(X)
 X = vector.transform(X)
 
 # Split data into train and test sets
-X_train, X_test, Y_train, Y_test = train_test_split(X, y, test_size=0.2, stratify=y, random_state=2)
+X_train, X_test, Y_train, Y_test = train_test_split(X, y, test_size=0.2, stratify=y, random_state=2) # type: ignore
 
 # Fit logistic regression model
 model = LogisticRegression()

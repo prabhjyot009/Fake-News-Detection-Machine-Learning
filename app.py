@@ -47,6 +47,7 @@ model.fit(X_train,Y_train)
 # website
 st.title('Fake News Detector')
 input_text = st.text_input('Enter news Article')
+#design 
 
 def prediction(input_text):
     input_data = vector.transform([input_text])

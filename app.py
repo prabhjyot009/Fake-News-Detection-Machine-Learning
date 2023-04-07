@@ -18,13 +18,17 @@ y = news_df['label']
 
 # Define stemming function
 ps = PorterStemmer()
+
+
 def stemming(content):
-    stemmed_content = re.sub('[^a-zA-Z]',' ',content)
+    stemmed_content = re.sub('[^a-zA-Z]', ' ', content)
     stemmed_content = stemmed_content.lower()
     stemmed_content = stemmed_content.split()
-    stemmed_content = [ps.stem(word) for word in stemmed_content if not word in stopwords.words('english')]
+    stemmed_content = [ps.stem(
+        word) for word in stemmed_content if not word in stopwords.words('english')]
     stemmed_content = ' '.join(stemmed_content)
     return stemmed_content
+
 
 # Apply stemming function to content column
 news_df['content'] = news_df['content'].apply(stemming)
@@ -37,21 +41,30 @@ vector.fit(X)
 X = vector.transform(X)
 
 # Split data into train and test sets
-X_train, X_test, Y_train, Y_test = train_test_split(X, y, test_size=0.2, stratify=y, random_state=2) # type: ignore
+X_train, X_test, Y_train, Y_test = train_test_split(
+    X, y, test_size=0.2, stratify=y, random_state=2)  # type: ignore
 
 # Fit logistic regression model
 model = LogisticRegression()
-model.fit(X_train,Y_train)
+model.fit(X_train, Y_train)
 
 
 # website
+st.set_page_config(page_title='Fake News Detector', page_icon='📰',layout='centered', initial_sidebar_state='auto')
 st.title('Fake News Detector')
 input_text = st.text_input('Enter news Article')
+# add some design to the website in python code itself using streamlit library in python.
+st.markdown('---')  # horizontal line in markdown
+# add a news gif to the website using streamlit library in python.
+st.image('news.gif', width=500)
+# make gif triangle shape.
+st.markdown('<style>img{border-radius: 50%;}</style>', unsafe_allow_html=True)
 
 def prediction(input_text):
     input_data = vector.transform([input_text])
     prediction = model.predict(input_data)
     return prediction[0]
+
 
 if input_text:
     pred = prediction(input_text)

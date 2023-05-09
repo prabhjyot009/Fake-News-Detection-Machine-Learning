@@ -58,7 +58,10 @@ st.markdown('---')  # horizontal line in markdown
 # add a news gif to the website using streamlit library in python.
 st.image('news.gif', width=500)
 # make gif triangle shape.
+
 st.markdown('<style>img{border-radius: 50%;}</style>', unsafe_allow_html=True)
+#image in center
+st.markdown('<style>div.row-widget.stRadio > div{flex-direction:row;}</style>', unsafe_allow_html=True)
 
 def prediction(input_text):
     input_data = vector.transform([input_text])
